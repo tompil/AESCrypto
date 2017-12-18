@@ -9,5 +9,6 @@ else()
     message(WARNING "The file conanbuildinfo.cmake doesn't exist, you have to run conan install first")
 endif()
 
-add_executable(CryptoAES main.cpp)
+
+add_executable(CryptoAES test/test.cpp)
 target_link_libraries(CryptoAES ${CONAN_LIBS})
