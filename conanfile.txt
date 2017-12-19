@@ -1,6 +1,9 @@
 [requires]
 gtest/1.8.0@lasote/stable
 
+[options]
+gtest:no_gmock=False
+
 [generators]
 cmake
 
