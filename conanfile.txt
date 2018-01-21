@@ -1,5 +1,6 @@
 [requires]
 gtest/1.8.0@lasote/stable
+gsl/1.0@microsoft/stable
 
 [options]
 gtest:no_gmock=False
