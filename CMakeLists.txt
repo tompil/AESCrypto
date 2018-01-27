@@ -10,5 +10,6 @@ else()
 endif()
 
 
-add_executable(CryptoAES test/test.cpp)
+add_executable(CryptoAES test/test.cpp include/key_expander.h)
+include_directories(include)
 target_link_libraries(CryptoAES ${CONAN_LIBS})
