@@ -12,6 +12,10 @@ namespace aes {
         public:
             word();
             word(gsl::span<uint8_t> w);
+            word(const word& w);
+            word(word&& w);
+            word& operator=(const word& w);
+            word& operator=(word&& w);
             static constexpr size_t size() { return WORD_SIZE; }
             uint8_t& operator[](size_t pos);
             const uint8_t& operator[](size_t pos) const;
