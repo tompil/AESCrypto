@@ -1,7 +1,8 @@
 #include <utils.h>
-#include <defs.h>
+
 
 namespace aes {
+
     void subword(word w) {
         for (uint8_t &i : w)
             i = internal::SBOX[i];
@@ -34,4 +35,5 @@ namespace aes {
         else
             return x << 1;
     }
+
 }

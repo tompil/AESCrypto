@@ -7,7 +7,9 @@
 #include <gsl/span>
 
 namespace aes {
+
     namespace internal {
+
         constexpr size_t WORD_SIZE = 4;
         constexpr size_t KEY128_WSIZE = 4;
         constexpr size_t KEY192_WSIZE = 6;
@@ -32,6 +34,7 @@ namespace aes {
                0xE1, 0xF8, 0x98, 0x11, 0x69, 0xD9, 0x8E, 0x94, 0x9B, 0x1E, 0x87, 0xE9, 0xCE, 0x55, 0x28, 0xDF,
                0x8C, 0xA1, 0x89, 0x0D, 0xBF, 0xE6, 0x42, 0x68, 0x41, 0x99, 0x2D, 0x0F, 0xB0, 0x54, 0xBB, 0x16
         }};
+
     }
 
     constexpr size_t KEY128_SIZE = internal::WORD_SIZE * internal::KEY128_WSIZE;
@@ -44,6 +47,7 @@ namespace aes {
     using block = gsl::span<uint8_t, BLOCK_SIZE>;
     using const_block = gsl::span<const uint8_t, BLOCK_SIZE>;
     using round_key = const_block;
+
 }
 
 #endif //CRYPTOAES_DEFS_H

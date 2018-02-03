@@ -2,6 +2,7 @@
 #include <algorithm>
 
 namespace aes {
+
     KeyExpander::KeyExpander(gsl::span<const uint8_t> key)
     {
         size_t ekey_size = (number_of_rounds + 1) * BLOCK_SIZE;
@@ -50,4 +51,5 @@ namespace aes {
     {
         return {expanded_key + i * internal::WORD_SIZE, internal::WORD_SIZE};
     }
+
 }
