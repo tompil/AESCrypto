@@ -3,53 +3,44 @@
 
 namespace aes {
 
-    KeyExpander::KeyExpander(gsl::span<const uint8_t> key)
+    expanded_key::expanded_key(aes128_key key) : key_wsize_(4), number_of_rounds_(10)
     {
-        size_t ekey_size = (number_of_rounds + 1) * BLOCK_SIZE;
-        expanded_key = new uint8_t[ekey_size];
         expand_key(key);
     }
 
-    aes::round_key KeyExpander::get_round_key(size_t key_idx) const
+    aes::round_key expanded_key::get_round_key(size_t key_idx) const
     {
-        return {expanded_key + key_idx * BLOCK_SIZE, BLOCK_SIZE};
+        return {expanded_key_ + key_idx * BLOCK_SIZE, BLOCK_SIZE};
     }
 
-    KeyExpander::~KeyExpander()
+    void expanded_key::expand_key(gsl::span<const uint8_t> key)
     {
-        delete[] expanded_key;
-    }
+        std::copy(key.begin(), key.end(), expanded_key_);
 
-    void KeyExpander::expand_key(gsl::span<const uint8_t> key)
-    {
-        std::copy(key.begin(), key.end(), expanded_key);
-
-        size_t nk = key.size() / internal::WORD_SIZE;
-
-        for (size_t i = nk; i < (number_of_rounds + 1) * internal::BLOCK_WSIZE; ++i)
+        uint8_t rcon = 0x01;
+        for (size_t i = key_wsize_; i < (number_of_rounds_ + 1) * internal::BLOCK_WSIZE; ++i)
         {
-            word prev = get_word(i - 1);
-            word temp = get_word(i);
-            std::copy(prev.begin(), prev.end(), temp.begin());
+            word ith_word = get_word(i);
+            copy(ith_word, get_word(i - 1));
 
-            if (i % nk == 0)
+            if (i % key_wsize_ == 0)
             {
-                rotword(temp);
-                subword(temp);
-                std::array<uint8_t, internal::WORD_SIZE> rcon = get_rcon(i / nk);
-                word_xor(temp, rcon);
+                rotword(ith_word);
+                subword(ith_word);
+                ith_word[0] ^= rcon;
+                rcon = xtime(rcon);
             }
-            else if (nk > 6 && i % nk == 4)
+            else if (key_wsize_ > 6 && i % key_wsize_ == 4)
             {
-                subword(temp);
+                subword(ith_word);
             }
-            word_xor(temp, get_word(i - nk));
+            word_xor(ith_word, get_word(i - key_wsize_));
         }
     }
 
-    aes::word KeyExpander::get_word(size_t i)
+    aes::word expanded_key::get_word(size_t i)
     {
-        return {expanded_key + i * internal::WORD_SIZE, internal::WORD_SIZE};
+        return {expanded_key_ + i * internal::WORD_SIZE, internal::WORD_SIZE};
     }
 
 }

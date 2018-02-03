@@ -22,7 +22,7 @@ TEST(KeyExpanderTestCase, Aes128KeyTest)
             {{0xd0, 0x14, 0xf9, 0xa8, 0xc9, 0xee, 0x25, 0x89, 0xe1, 0x3f, 0x0c, 0xc8, 0xb6, 0x63, 0x0c, 0xa6}}
     }};
 
-    aes::KeyExpander ke(key);
+    aes::expanded_key ke(key);
     for (size_t i = 0; i < 11; ++i)
     {
         std::array<uint8_t, aes::BLOCK_SIZE> rk{0};

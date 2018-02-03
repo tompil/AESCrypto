@@ -66,3 +66,11 @@ TEST(UtilsTestCase, XtimeTest) {
     EXPECT_EQ(aes::xtime(0x80), 0x1B);
     EXPECT_EQ(aes::xtime(0x1B), 0x36);
 }
+
+TEST(UtilsTestCase, CopyWordTest) {
+    word_array src{};
+    std::iota(src.begin(), src.end(), 0);
+    word_array dst{};
+    aes::copy(dst, src);
+    EXPECT_EQ(src, dst);
+}

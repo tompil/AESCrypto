@@ -19,16 +19,6 @@ namespace aes {
             dst[i] ^= src[i];
     }
 
-    std::array <uint8_t, internal::WORD_SIZE> get_rcon(size_t i) {
-        std::array <uint8_t, internal::WORD_SIZE> tmp{0};
-        uint8_t x = 0x01;
-        for (size_t j = 0; j < i - 1; ++j) {
-            x = xtime(x);
-        }
-        tmp[0] = x;
-        return tmp;
-    }
-
     uint8_t xtime(uint8_t x) {
         if (x & 0x80)
             return (x << 1) ^ 0x1B;

@@ -47,6 +47,7 @@ namespace aes {
     using block = gsl::span<uint8_t, BLOCK_SIZE>;
     using const_block = gsl::span<const uint8_t, BLOCK_SIZE>;
     using round_key = const_block;
+    using aes128_key = gsl::span<const uint8_t, 4 * internal::WORD_SIZE>;
 
 }
 
