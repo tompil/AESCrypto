@@ -9,7 +9,7 @@ namespace aes {
         expand_key(key);
     }
 
-    gsl::span<const uint8_t> KeyExpander::get_round_key(size_t key_idx) const
+    aes::round_key KeyExpander::get_round_key(size_t key_idx) const
     {
         return {expanded_key + key_idx * BLOCK_SIZE, BLOCK_SIZE};
     }
@@ -46,28 +46,28 @@ namespace aes {
         }
     }
 
-    KeyExpander::word KeyExpander::get_word(size_t i)
+    aes::word KeyExpander::get_word(size_t i)
     {
         return {expanded_key + i * internal::WORD_SIZE, internal::WORD_SIZE};
     }
 
-    void KeyExpander::subword(KeyExpander::word& w)
+    void KeyExpander::subword(aes::word w)
     {
         for (uint8_t& i : w)
             i = internal::SBOX[i];
     }
 
-    void KeyExpander::rotword(KeyExpander::word w)
+    void KeyExpander::rotword(aes::word w)
     {
         uint8_t tmp = w[0];
         std::copy(w.begin() + 1, w.end(), w.begin());
         w[3] = tmp;
     }
 
-    void KeyExpander::word_xor(KeyExpander::word& d, const KeyExpander::word& s)
+    void KeyExpander::word_xor(aes::word dst, aes::const_word src)
     {
         for (size_t i = 0; i < internal::WORD_SIZE; ++i)
-            d[i] ^= s[i];
+            dst[i] ^= src[i];
     }
 
     std::array<uint8_t, internal::WORD_SIZE> KeyExpander::get_rcon(size_t i)

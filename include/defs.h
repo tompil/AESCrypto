@@ -4,6 +4,7 @@
 #include <array>
 #include <cstddef>
 #include <cstdint>
+#include <gsl/span>
 
 namespace aes {
     namespace internal {
@@ -37,6 +38,12 @@ namespace aes {
     constexpr size_t KEY192_SIZE = internal::WORD_SIZE * internal::KEY192_WSIZE;
     constexpr size_t KEY256_SIZE = internal::WORD_SIZE * internal::KEY256_WSIZE;
     constexpr size_t BLOCK_SIZE = internal::WORD_SIZE * internal::BLOCK_WSIZE;
+
+    using word = gsl::span<uint8_t, internal::WORD_SIZE>;
+    using const_word = gsl::span<const uint8_t, internal::WORD_SIZE>;
+    using block = gsl::span<uint8_t, BLOCK_SIZE>;
+    using const_block = gsl::span<const uint8_t, BLOCK_SIZE>;
+    using round_key = const_block;
 }
 
 #endif //CRYPTOAES_DEFS_H
