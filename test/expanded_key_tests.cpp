@@ -1,7 +1,7 @@
 #include <array>
 #include <vector>
 #include <gtest/gtest.h>
-#include <key_expander.h>
+#include <expanded_key.h>
 
 
 using block_array = std::array<uint8_t, aes::BLOCK_SIZE>;
