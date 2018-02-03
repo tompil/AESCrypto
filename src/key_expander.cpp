@@ -8,6 +8,16 @@ namespace aes {
         expand_key(key);
     }
 
+    expanded_key::expanded_key(aes192_key key) : key_wsize_(6), number_of_rounds_(12)
+    {
+        expand_key(key);
+    }
+
+    expanded_key::expanded_key(aes256_key key) : key_wsize_(8), number_of_rounds_(14)
+    {
+        expand_key(key);
+    }
+
     aes::round_key expanded_key::get_round_key(size_t key_idx) const
     {
         return {expanded_key_ + key_idx * BLOCK_SIZE, BLOCK_SIZE};

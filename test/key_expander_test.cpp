@@ -21,14 +21,13 @@ TEST(KeyExpanderTestCase, Aes128KeyTest)
             {{0xac, 0x77, 0x66, 0xf3, 0x19, 0xfa, 0xdc, 0x21, 0x28, 0xd1, 0x29, 0x41, 0x57, 0x5c, 0x00, 0x6e}},
             {{0xd0, 0x14, 0xf9, 0xa8, 0xc9, 0xee, 0x25, 0x89, 0xe1, 0x3f, 0x0c, 0xc8, 0xb6, 0x63, 0x0c, 0xa6}}
     }};
-
-    aes::expanded_key ke(key);
+    
+    aes::expanded_key exp_key(aes::aes128_key{key});
     for (size_t i = 0; i < 11; ++i)
     {
         std::array<uint8_t, aes::BLOCK_SIZE> rk{0};
-        gsl::span key_rk = ke.get_round_key(i);
+        gsl::span key_rk = exp_key.get_round_key(i);
         std::copy(key_rk.begin(), key_rk.end(), rk.begin());
         EXPECT_EQ(rk, round_keys[i]) << "Round key " << i << " failed.";
     }
-
 }

@@ -16,6 +16,8 @@ namespace aes {
     class expanded_key {
     public:
         explicit expanded_key(aes128_key key);
+        explicit expanded_key(aes192_key key);
+        explicit expanded_key(aes256_key key);
         aes::round_key get_round_key(size_t key_idx) const;
 
     private:

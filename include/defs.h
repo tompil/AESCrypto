@@ -48,7 +48,8 @@ namespace aes {
     using const_block = gsl::span<const uint8_t, BLOCK_SIZE>;
     using round_key = const_block;
     using aes128_key = gsl::span<const uint8_t, 4 * internal::WORD_SIZE>;
-
+    using aes192_key = gsl::span<const uint8_t, 6 * internal::WORD_SIZE>;
+    using aes256_key = gsl::span<const uint8_t, 8 * internal::WORD_SIZE>;
 }
 
 #endif //CRYPTOAES_DEFS_H
