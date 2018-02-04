@@ -15,10 +15,10 @@ namespace aes {
 
         class expanded_key {
         public:
-            explicit expanded_key(aes128_key key);
-            explicit expanded_key(aes192_key key);
-            explicit expanded_key(aes256_key key);
-            round_key get_round_key(size_t key_idx) const;
+            explicit expanded_key(aes128_key key) noexcept;
+            explicit expanded_key(aes192_key key) noexcept;
+            explicit expanded_key(aes256_key key) noexcept;
+            round_key get_round_key(size_t key_idx) const noexcept;
 
         private:
             static constexpr size_t AES128_ROUNDS_NUMBER = 10;
@@ -30,8 +30,8 @@ namespace aes {
             const uint8_t number_of_rounds_;
             const uint8_t key_wsize_;
 
-            void expand_key(gsl::span<const uint8_t> key);
-            word get_word(size_t i);
+            void expand_key(gsl::span<const uint8_t> key) noexcept;
+            word get_word(size_t i) noexcept;
         };
 
     }

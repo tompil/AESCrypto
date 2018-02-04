@@ -3,26 +3,26 @@
 
 namespace aes {
     namespace internal {
-        expanded_key::expanded_key(aes128_key key)
+        expanded_key::expanded_key(aes128_key key) noexcept
                 : key_wsize_(KEY128_WSIZE), number_of_rounds_(AES128_ROUNDS_NUMBER) {
             expand_key(key);
         }
 
-        expanded_key::expanded_key(aes192_key key)
+        expanded_key::expanded_key(aes192_key key) noexcept
                 : key_wsize_(KEY192_WSIZE), number_of_rounds_(AES192_ROUNDS_NUMBER) {
             expand_key(key);
         }
 
-        expanded_key::expanded_key(aes256_key key)
+        expanded_key::expanded_key(aes256_key key) noexcept
                 : key_wsize_(KEY256_WSIZE), number_of_rounds_(AES256_ROUNDS_NUMBER) {
             expand_key(key);
         }
 
-        round_key expanded_key::get_round_key(size_t key_idx) const {
+        round_key expanded_key::get_round_key(size_t key_idx) const noexcept {
             return {expanded_key_ + key_idx * BLOCK_SIZE, BLOCK_SIZE};
         }
 
-        void expanded_key::expand_key(gsl::span<const uint8_t> key) {
+        void expanded_key::expand_key(gsl::span<const uint8_t> key) noexcept {
             std::copy(key.begin(), key.end(), expanded_key_);
 
             uint8_t rcon = 0x01;
@@ -42,7 +42,7 @@ namespace aes {
             }
         }
 
-        word expanded_key::get_word(size_t i) {
+        word expanded_key::get_word(size_t i) noexcept {
             return {expanded_key_ + i * internal::WORD_SIZE, internal::WORD_SIZE};
         }
 
