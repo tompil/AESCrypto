@@ -6,14 +6,16 @@
 #include <algorithm>
 
 namespace aes {
+    namespace internal {
 
-    void subword(word w);
-    void rotword(word w);
-    void word_xor(word dst, const_word src);
-    uint8_t xtime(uint8_t x);
+        void subword(word w);
+        void rotword(word w);
+        void word_xor(word dst, const_word src);
+        uint8_t xtime(uint8_t x);
+        inline void copy(word dst, const_word src) {
+            std::copy(src.begin(), src.end(), dst.begin());
+        }
 
-    inline void copy(word dst, const_word src) {
-        std::copy(src.begin(), src.end(), dst.begin());
     }
 }
 

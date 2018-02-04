@@ -15,6 +15,13 @@ namespace aes {
         constexpr size_t KEY192_WSIZE = 6;
         constexpr size_t KEY256_WSIZE = 8;
         constexpr size_t BLOCK_WSIZE = 4;
+        constexpr size_t BLOCK_SIZE = internal::WORD_SIZE * internal::BLOCK_WSIZE;
+
+        using word = gsl::span<uint8_t, internal::WORD_SIZE>;
+        using const_word = gsl::span<const uint8_t, internal::WORD_SIZE>;
+        using block = gsl::span<uint8_t, BLOCK_SIZE>;
+        using const_block = gsl::span<const uint8_t, BLOCK_SIZE>;
+        using round_key = const_block;
 
         constexpr std::array<uint8_t, 256> SBOX = {{
                0x63, 0x7C, 0x77, 0x7B, 0xF2, 0x6B, 0x6F, 0xC5, 0x30, 0x01, 0x67, 0x2B, 0xFE, 0xD7, 0xAB, 0x76,
@@ -40,16 +47,11 @@ namespace aes {
     constexpr size_t KEY128_SIZE = internal::WORD_SIZE * internal::KEY128_WSIZE;
     constexpr size_t KEY192_SIZE = internal::WORD_SIZE * internal::KEY192_WSIZE;
     constexpr size_t KEY256_SIZE = internal::WORD_SIZE * internal::KEY256_WSIZE;
-    constexpr size_t BLOCK_SIZE = internal::WORD_SIZE * internal::BLOCK_WSIZE;
 
-    using word = gsl::span<uint8_t, internal::WORD_SIZE>;
-    using const_word = gsl::span<const uint8_t, internal::WORD_SIZE>;
-    using block = gsl::span<uint8_t, BLOCK_SIZE>;
-    using const_block = gsl::span<const uint8_t, BLOCK_SIZE>;
-    using round_key = const_block;
-    using aes128_key = gsl::span<const uint8_t, 4 * internal::WORD_SIZE>;
-    using aes192_key = gsl::span<const uint8_t, 6 * internal::WORD_SIZE>;
-    using aes256_key = gsl::span<const uint8_t, 8 * internal::WORD_SIZE>;
+    using aes128_key = gsl::span<const uint8_t, KEY128_SIZE>;
+    using aes192_key = gsl::span<const uint8_t, KEY192_SIZE>;
+    using aes256_key = gsl::span<const uint8_t, KEY256_SIZE>;
+
 }
 
 #endif //CRYPTOAES_DEFS_H
