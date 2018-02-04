@@ -13,6 +13,8 @@
 namespace aes {
     namespace internal {
 
+        using round_key = const_block;
+
         class expanded_key {
         public:
             explicit expanded_key(aes128_key key) noexcept;
