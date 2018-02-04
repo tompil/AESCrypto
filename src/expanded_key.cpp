@@ -3,15 +3,18 @@
 
 namespace aes {
     namespace internal {
-        expanded_key::expanded_key(aes128_key key) : key_wsize_(4), number_of_rounds_(10) {
+        expanded_key::expanded_key(aes128_key key)
+                : key_wsize_(KEY128_WSIZE), number_of_rounds_(AES128_ROUNDS_NUMBER) {
             expand_key(key);
         }
 
-        expanded_key::expanded_key(aes192_key key) : key_wsize_(6), number_of_rounds_(12) {
+        expanded_key::expanded_key(aes192_key key)
+                : key_wsize_(KEY192_WSIZE), number_of_rounds_(AES192_ROUNDS_NUMBER) {
             expand_key(key);
         }
 
-        expanded_key::expanded_key(aes256_key key) : key_wsize_(8), number_of_rounds_(14) {
+        expanded_key::expanded_key(aes256_key key)
+                : key_wsize_(KEY256_WSIZE), number_of_rounds_(AES256_ROUNDS_NUMBER) {
             expand_key(key);
         }
 
