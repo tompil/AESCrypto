@@ -4,7 +4,7 @@
 #include <expanded_key.h>
 
 using aes::internal::expanded_key;
-using block_array = std::array<uint8_t, aes::internal::BLOCK_SIZE>;
+using block_array = std::array<uint8_t, aes::BLOCK_SIZE>;
 
 void validate_round_keys(const expanded_key& exp_key, const std::vector<block_array>& correct_round_keys) {
     for (size_t i = 0; i < correct_round_keys.size(); ++i)

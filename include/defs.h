@@ -15,10 +15,9 @@ namespace aes {
         constexpr size_t KEY192_WSIZE = 6;
         constexpr size_t KEY256_WSIZE = 8;
         constexpr size_t BLOCK_WSIZE = 4;
-        constexpr size_t BLOCK_SIZE = internal::WORD_SIZE * internal::BLOCK_WSIZE;
 
-        using word = gsl::span<uint8_t, internal::WORD_SIZE>;
-        using const_word = gsl::span<const uint8_t, internal::WORD_SIZE>;
+        using word = gsl::span<uint8_t, WORD_SIZE>;
+        using const_word = gsl::span<const uint8_t, WORD_SIZE>;
 
 
 
@@ -51,9 +50,10 @@ namespace aes {
     using aes192_key = gsl::span<const uint8_t, KEY192_SIZE>;
     using aes256_key = gsl::span<const uint8_t, KEY256_SIZE>;
 
-    using block = gsl::span<uint8_t, internal::BLOCK_SIZE>;
-    using const_block = gsl::span<const uint8_t, internal::BLOCK_SIZE>;
-    
+    constexpr size_t BLOCK_SIZE = internal::WORD_SIZE * internal::BLOCK_WSIZE;
+    using block = gsl::span<uint8_t, BLOCK_SIZE>;
+    using const_block = gsl::span<const uint8_t, BLOCK_SIZE>;
+
 }
 
 #endif //CRYPTOAES_DEFS_H
