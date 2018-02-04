@@ -67,7 +67,7 @@ TEST(ExpandedKeyTestCase, Aes192KeyTest)
     validate_round_keys(exp_key, correct_round_keys);
 }
 
-TEST(ExpandedKeyTestCase, Aes156KeyTest)
+TEST(ExpandedKeyTestCase, Aes256KeyTest)
 {
     std::array<uint8_t, aes::KEY256_SIZE> key = {
         0x60, 0x3d, 0xeb, 0x10, 0x15, 0xca, 0x71, 0xbe, 0x2b, 0x73, 0xae, 0xf0, 0x85, 0x7d, 0x77, 0x81,
@@ -95,4 +95,17 @@ TEST(ExpandedKeyTestCase, Aes156KeyTest)
 
     expanded_key exp_key(aes::aes256_key{key});
     validate_round_keys(exp_key, correct_round_keys);
+}
+
+TEST(ExpandedKeyTestCase, SizeTest) {
+    std::array<uint8_t, aes::KEY128_SIZE> key128{};
+    std::array<uint8_t, aes::KEY192_SIZE> key192{};
+    std::array<uint8_t, aes::KEY256_SIZE> key256{};
+
+    expanded_key exp_key128(aes::aes128_key{key128});
+    EXPECT_EQ(exp_key128.size(), 11);
+    expanded_key exp_key192(aes::aes192_key{key192});
+    EXPECT_EQ(exp_key192.size(), 13);
+    expanded_key exp_key256(aes::aes256_key{key256});
+    EXPECT_EQ(exp_key256.size(), 15);
 }

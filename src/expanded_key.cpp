@@ -4,17 +4,17 @@
 namespace aes {
     namespace internal {
         expanded_key::expanded_key(aes128_key key) noexcept
-                : key_wsize_(KEY128_WSIZE), number_of_rounds_(AES128_ROUNDS_NUMBER) {
+                : key_wsize_(KEY128_WSIZE), number_of_keys_(AES128_ROUNDS_NUMBER + 1) {
             expand_key(key);
         }
 
         expanded_key::expanded_key(aes192_key key) noexcept
-                : key_wsize_(KEY192_WSIZE), number_of_rounds_(AES192_ROUNDS_NUMBER) {
+                : key_wsize_(KEY192_WSIZE), number_of_keys_(AES192_ROUNDS_NUMBER + 1) {
             expand_key(key);
         }
 
         expanded_key::expanded_key(aes256_key key) noexcept
-                : key_wsize_(KEY256_WSIZE), number_of_rounds_(AES256_ROUNDS_NUMBER) {
+                : key_wsize_(KEY256_WSIZE), number_of_keys_(AES256_ROUNDS_NUMBER + 1) {
             expand_key(key);
         }
 
@@ -26,7 +26,7 @@ namespace aes {
             std::copy(key.begin(), key.end(), expanded_key_);
 
             uint8_t rcon = 0x01;
-            for (size_t i = key_wsize_; i < (number_of_rounds_ + 1) * internal::BLOCK_WSIZE; ++i) {
+            for (size_t i = key_wsize_; i < number_of_keys_ * internal::BLOCK_WSIZE; ++i) {
                 word ith_word = get_word(i);
                 copy(ith_word, get_word(i - 1));
 
