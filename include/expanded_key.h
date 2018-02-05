@@ -20,7 +20,7 @@ namespace aes {
             explicit expanded_key(aes128_key key) noexcept;
             explicit expanded_key(aes192_key key) noexcept;
             explicit expanded_key(aes256_key key) noexcept;
-            round_key get_round_key(size_t key_idx) const noexcept;
+            round_key operator[](size_t key_idx) const noexcept;
             uint8_t size() const noexcept { return number_of_keys_; };
 
         private:

@@ -18,7 +18,7 @@ namespace aes {
             expand_key(key);
         }
 
-        round_key expanded_key::get_round_key(size_t key_idx) const noexcept {
+        round_key expanded_key::operator[](size_t key_idx) const noexcept {
             return {expanded_key_ + key_idx * BLOCK_SIZE, BLOCK_SIZE};
         }
 

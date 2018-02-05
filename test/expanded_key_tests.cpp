@@ -10,7 +10,7 @@ void validate_round_keys(const expanded_key& exp_key, const std::vector<block_ar
     for (size_t i = 0; i < correct_round_keys.size(); ++i)
     {
         block_array rk{0};
-        gsl::span key_rk = exp_key.get_round_key(i);
+        gsl::span key_rk = exp_key[i];
         std::copy(key_rk.begin(), key_rk.end(), rk.begin());
         EXPECT_EQ(rk, correct_round_keys[i]) << "Round key " << i << " failed.";
     }
