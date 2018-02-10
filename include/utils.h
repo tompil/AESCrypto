@@ -5,16 +5,16 @@
 
 #include <algorithm>
 
+
 namespace aes {
     namespace internal {
-
         void subword(word w) noexcept;
         void rotword(word w) noexcept;
         void word_xor(word dst, const_word src) noexcept;
         uint8_t xtime(uint8_t x) noexcept;
         uint8_t xtime3(uint8_t p) noexcept;
 
-            inline void copy(word dst, const_word src) noexcept {
+        inline void copy(word dst, const_word src) noexcept {
             std::copy(src.begin(), src.end(), dst.begin());
         }
 

@@ -12,7 +12,6 @@
 
 namespace aes {
     namespace internal {
-
         using round_key = const_block;
 
         class expanded_key {
@@ -36,7 +35,6 @@ namespace aes {
             void expand_key(gsl::span<const uint8_t> key) noexcept;
             word get_word(size_t i) noexcept;
         };
-
     }
 }
 

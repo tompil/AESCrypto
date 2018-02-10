@@ -18,7 +18,7 @@ using block_array = std::array<ByteType, BLOCK_SIZE>;
 TEST(UtilsTestCase, SubwordTest) {
     using aes::internal::SBOX;
     using aes::internal::const_word;
-    constexpr size_t words_in_sbox = SBOX.size() / WORD_SIZE;
+    constexpr size_t words_in_sbox{SBOX.size() / WORD_SIZE};
 
     for (size_t i = 0; i < words_in_sbox; ++i) {
         word_array input_word{};
@@ -42,9 +42,9 @@ TEST(UtilsTestCase, RotwordTest) {
 }
 
 TEST(UtilsTestCase, WordXorTest) {
-    std::random_device rd;
-    std::mt19937 gen(rd());
-    std::uniform_int_distribution<> dis(0, std::numeric_limits<ByteType>::max());
+    std::random_device rd{};
+    std::mt19937 gen{rd()};
+    std::uniform_int_distribution<> dis{0, std::numeric_limits<ByteType>::max()};
     auto byte_rand = [&dis, &gen]() { return dis(gen); };
 
     word_array first{};
@@ -102,13 +102,12 @@ TEST(UtilsTestCase, ShiftrowsTest) {
         0x5F, 0x99, 0x8A, 0x4C
     };
 
-    block_array correct_block = {
+    block_array correct_block{
         0xB4, 0x58, 0x12, 0x4C,
         0x68, 0xB6, 0x8A, 0x01,
         0x4B, 0x99, 0xF8, 0x2E,
         0x5F, 0x15, 0x55, 0x4C
     };
-
 
     aes::internal::shiftrows(input_block);
     EXPECT_EQ(input_block, correct_block);

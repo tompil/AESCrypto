@@ -10,7 +10,7 @@ namespace aes {
         }
 
         void rotword(word w) noexcept {
-            uint8_t tmp = w[0];
+            uint8_t tmp{w[0]};
             std::copy(w.begin() + 1, w.end(), w.begin());
             w[3] = tmp;
         }
@@ -33,7 +33,7 @@ namespace aes {
         }
 
         void shiftrows(block b) noexcept {
-            uint8_t tmp[6] = {b[1], b[2], b[3], b[6], b[7], b[11]};
+            uint8_t tmp[6]{b[1], b[2], b[3], b[6], b[7], b[11]};
             b[1] = b[5]; b[5] = b[9]; b[9] = b[13]; b[13] = tmp[0];
             b[2] = b[10]; b[6] = b[14]; b[10] = tmp[1]; b[14] = tmp[3];
             b[3] = b[15]; b[7] = tmp[2]; b[11] = tmp[4], b[15] = tmp[5];
@@ -63,6 +63,5 @@ namespace aes {
             for (size_t i = 0; i < dst.size(); ++i)
                 dst[i] ^= src[i];
         }
-
     }
 }

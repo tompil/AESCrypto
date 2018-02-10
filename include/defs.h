@@ -1,13 +1,14 @@
 #ifndef CRYPTOAES_DEFS_H
 #define CRYPTOAES_DEFS_H
 
+#include <gsl/span>
+
 #include <array>
 #include <cstddef>
 #include <cstdint>
-#include <gsl/span>
+
 
 namespace aes {
-
     namespace internal {
 
         constexpr size_t WORD_SIZE = 4;
@@ -19,9 +20,7 @@ namespace aes {
         using word = gsl::span<uint8_t, WORD_SIZE>;
         using const_word = gsl::span<const uint8_t, WORD_SIZE>;
 
-
-
-        constexpr std::array<uint8_t, 256> SBOX = {{
+        constexpr std::array<uint8_t, 256> SBOX = {
                0x63, 0x7C, 0x77, 0x7B, 0xF2, 0x6B, 0x6F, 0xC5, 0x30, 0x01, 0x67, 0x2B, 0xFE, 0xD7, 0xAB, 0x76,
                0xCA, 0x82, 0xC9, 0x7D, 0xFA, 0x59, 0x47, 0xF0, 0xAD, 0xD4, 0xA2, 0xAF, 0x9C, 0xA4, 0x72, 0xC0,
                0xB7, 0xFD, 0x93, 0x26, 0x36, 0x3F, 0xF7, 0xCC, 0x34, 0xA5, 0xE5, 0xF1, 0x71, 0xD8, 0x31, 0x15,
@@ -38,22 +37,21 @@ namespace aes {
                0x70, 0x3E, 0xB5, 0x66, 0x48, 0x03, 0xF6, 0x0E, 0x61, 0x35, 0x57, 0xB9, 0x86, 0xC1, 0x1D, 0x9E,
                0xE1, 0xF8, 0x98, 0x11, 0x69, 0xD9, 0x8E, 0x94, 0x9B, 0x1E, 0x87, 0xE9, 0xCE, 0x55, 0x28, 0xDF,
                0x8C, 0xA1, 0x89, 0x0D, 0xBF, 0xE6, 0x42, 0x68, 0x41, 0x99, 0x2D, 0x0F, 0xB0, 0x54, 0xBB, 0x16
-        }};
+        };
 
     }
 
-    constexpr size_t KEY128_SIZE = internal::WORD_SIZE * internal::KEY128_WSIZE;
-    constexpr size_t KEY192_SIZE = internal::WORD_SIZE * internal::KEY192_WSIZE;
-    constexpr size_t KEY256_SIZE = internal::WORD_SIZE * internal::KEY256_WSIZE;
+    constexpr size_t KEY128_SIZE{internal::WORD_SIZE * internal::KEY128_WSIZE};
+    constexpr size_t KEY192_SIZE{internal::WORD_SIZE * internal::KEY192_WSIZE};
+    constexpr size_t KEY256_SIZE{internal::WORD_SIZE * internal::KEY256_WSIZE};
 
     using aes128_key = gsl::span<const uint8_t, KEY128_SIZE>;
     using aes192_key = gsl::span<const uint8_t, KEY192_SIZE>;
     using aes256_key = gsl::span<const uint8_t, KEY256_SIZE>;
 
-    constexpr size_t BLOCK_SIZE = internal::WORD_SIZE * internal::BLOCK_WSIZE;
+    constexpr size_t BLOCK_SIZE{internal::WORD_SIZE * internal::BLOCK_WSIZE};
     using block = gsl::span<uint8_t, BLOCK_SIZE>;
     using const_block = gsl::span<const uint8_t, BLOCK_SIZE>;
-
 }
 
 #endif //CRYPTOAES_DEFS_H

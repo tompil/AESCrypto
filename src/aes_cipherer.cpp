@@ -1,11 +1,10 @@
-#include <aes_cipher.h>
+#include <aes_cipherer.h>
 
 
 namespace aes {
-
     void aes_cipherer::cipher(const_block in, block out) const {
         using namespace internal;
-        auto add_round_key = block_xor;
+        auto add_round_key{block_xor};
 
         std::copy(in.begin(), in.end(), out.begin());
         add_round_key(out, ekey_[0]);
@@ -21,5 +20,4 @@ namespace aes {
         shiftrows(out);
         add_round_key(out, ekey_[ekey_.size() - 1]);
     }
-
 }
