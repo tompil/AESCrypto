@@ -4,10 +4,9 @@
 #include "defs.h"
 #include "utils.h"
 
-#include <gsl/span>
-
 #include <cstdint>
 #include <cstddef>
+#include <gsl/span>
 
 
 namespace aes {

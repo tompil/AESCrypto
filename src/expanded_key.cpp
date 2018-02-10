@@ -33,12 +33,12 @@ namespace aes {
                 copy(ith_word, get_word(i - 1));
 
                 if (i % key_wsize_ == 0) {
-                    rotword(ith_word);
-                    subword(ith_word);
+                    rot_word(ith_word);
+                    sub_word(ith_word);
                     ith_word[0] ^= rcon;
                     rcon = xtime(rcon);
                 } else if (key_wsize_ > 6 && i % key_wsize_ == 4) {
-                    subword(ith_word);
+                    sub_word(ith_word);
                 }
                 word_xor(ith_word, get_word(i - key_wsize_));
             }

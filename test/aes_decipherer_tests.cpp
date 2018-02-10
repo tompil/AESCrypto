@@ -1,9 +1,8 @@
 #include "aes_decipherer.h"
 #include "test_helpers.h"
 
-#include <gtest/gtest.h>
-
 #include <array>
+#include <gtest/gtest.h>
 
 
 TEST(AesDeciphererTestCase, Aes128Test) {
@@ -58,4 +57,3 @@ TEST(AesDeciphererTestCase, Aes256Test) {
     decipherer.decipher(input, output);
     EXPECT_EQ(output, correct_output);
 }
-

@@ -10,13 +10,13 @@ namespace aes {
         add_round_key(out, ekey_[0]);
 
         for (uint8_t i = 1; i < ekey_.size() - 1; ++i) {
-            subbytes(out);
+            sub_bytes(out);
             shiftrows(out);
             mixcolumns(out);
             add_round_key(out, ekey_[i]);
         }
 
-        subbytes(out);
+        sub_bytes(out);
         shiftrows(out);
         add_round_key(out, ekey_[ekey_.size() - 1]);
     }

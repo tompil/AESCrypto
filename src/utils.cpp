@@ -4,12 +4,12 @@
 namespace aes {
     namespace internal {
 
-        void subword(word w) noexcept {
+        void sub_word(word w) noexcept {
             for (uint8_t &i : w)
                 i = internal::SBOX[i];
         }
 
-        void rotword(word w) noexcept {
+        void rot_word(word w) noexcept {
             uint8_t tmp{w[0]};
             std::copy(w.begin() + 1, w.end(), w.begin());
             w[3] = tmp;
@@ -27,12 +27,12 @@ namespace aes {
                 return x << 1;
         }
 
-        void subbytes(block b) noexcept {
+        void sub_bytes(block b) noexcept {
             for (uint8_t &i : b)
                 i = internal::SBOX[i];
         }
 
-        void shiftrows(block b) noexcept {
+        void shift_rows(block b) noexcept {
             uint8_t tmp[6]{b[1], b[2], b[3], b[6], b[7], b[11]};
             b[1] = b[5]; b[5] = b[9]; b[9] = b[13]; b[13] = tmp[0];
             b[2] = b[10]; b[6] = b[14]; b[10] = tmp[1]; b[14] = tmp[3];

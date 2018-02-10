@@ -1,11 +1,10 @@
 #ifndef CRYPTOAES_DEFS_H
 #define CRYPTOAES_DEFS_H
 
-#include <gsl/span>
-
 #include <array>
 #include <cstddef>
 #include <cstdint>
+#include <gsl/span>
 
 
 namespace aes {

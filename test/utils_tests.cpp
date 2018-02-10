@@ -1,8 +1,7 @@
 #include "utils.h"
 
-#include <gtest/gtest.h>
-
 #include <array>
+#include <gtest/gtest.h>
 #include <limits>
 #include <numeric>
 #include <random>
@@ -23,7 +22,7 @@ TEST(UtilsTestCase, SubwordTest) {
     for (size_t i = 0; i < words_in_sbox; ++i) {
         word_array input_word{};
         std::iota(input_word.begin(), input_word.end(), i * WORD_SIZE);
-        aes::internal::subword(input_word);
+        aes::internal::sub_word(input_word);
 
         const_word correct_word{SBOX.data() + i * WORD_SIZE, WORD_SIZE};
         EXPECT_EQ(const_word{input_word}, correct_word);
@@ -33,7 +32,7 @@ TEST(UtilsTestCase, SubwordTest) {
 TEST(UtilsTestCase, RotwordTest) {
     word_array input_word{};
     std::iota(input_word.begin(), input_word.end(), 0);
-    aes::internal::rotword(input_word);
+    aes::internal::rot_word(input_word);
 
     word_array correct_word{};
     std::iota(correct_word.begin(), correct_word.end() - 1, 1);
@@ -87,7 +86,7 @@ TEST(UtilsTestCase, SubbytesTest) {
     for (size_t i = 0; i < blocks_in_sbox; ++i) {
         block_array input_block{};
         std::iota(input_block.begin(), input_block.end(), i * BLOCK_SIZE);
-        aes::internal::subbytes(input_block);
+        aes::internal::sub_bytes(input_block);
 
         const_block correct_block{SBOX.data() + i * BLOCK_SIZE, BLOCK_SIZE};
         EXPECT_EQ(const_block{input_block}, correct_block);

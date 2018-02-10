@@ -1,9 +1,8 @@
 #include "aes_cipherer.h"
 #include "test_helpers.h"
 
-#include <gtest/gtest.h>
-
 #include <array>
+#include <gtest/gtest.h>
 
 
 TEST(AesCiphererTestCase, Aes128Test) {

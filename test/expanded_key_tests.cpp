@@ -1,8 +1,7 @@
 #include "expanded_key.h"
 
-#include <gtest/gtest.h>
-
 #include <array>
+#include <gtest/gtest.h>
 #include <vector>
 
 
