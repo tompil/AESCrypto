@@ -1,7 +1,7 @@
 #ifndef CRYPTOAES_UTILS_H
 #define CRYPTOAES_UTILS_H
 
-#include <defs.h>
+#include "defs.h"
 
 #include <algorithm>
 

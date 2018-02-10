@@ -1,7 +1,7 @@
 #ifndef CRYPTOAES_AES_CIPHER_H
 #define CRYPTOAES_AES_CIPHER_H
 
-#include <expanded_key.h>
+#include "expanded_key.h"
 
 namespace aes {
     class aes_cipherer {

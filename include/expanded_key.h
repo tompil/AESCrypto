@@ -1,8 +1,8 @@
 #ifndef CRYPTOAES_KEY_EXPANDER_H
 #define CRYPTOAES_KEY_EXPANDER_H
 
-#include <defs.h>
-#include <utils.h>
+#include "defs.h"
+#include "utils.h"
 
 #include <gsl/span>
 
