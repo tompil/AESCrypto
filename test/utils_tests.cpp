@@ -1,8 +1,6 @@
 #include "utils.h"
 
-#include <array>
 #include <gtest/gtest.h>
-#include <limits>
 #include <numeric>
 #include <random>
 
@@ -14,7 +12,7 @@ using word_array = std::array<ByteType, WORD_SIZE>;
 using block_array = std::array<ByteType, BLOCK_SIZE>;
 
 
-TEST(UtilsTestCase, SubwordTest) {
+TEST(UtilsTestCase, SubWordTest) {
     using aes::internal::SBOX;
     using aes::internal::const_word;
     constexpr size_t words_in_sbox{SBOX.size() / WORD_SIZE};
@@ -29,7 +27,7 @@ TEST(UtilsTestCase, SubwordTest) {
     }
 }
 
-TEST(UtilsTestCase, RotwordTest) {
+TEST(UtilsTestCase, RotWordTest) {
     word_array input_word{};
     std::iota(input_word.begin(), input_word.end(), 0);
     aes::internal::rot_word(input_word);
@@ -62,7 +60,7 @@ TEST(UtilsTestCase, WordXorTest) {
     EXPECT_EQ(input_word, correct_word);
 }
 
-TEST(UtilsTestCase, XtimeTest) {
+TEST(UtilsTestCase, XTimeTest) {
     using aes::internal::xtime;
     EXPECT_EQ(xtime(0x01), 0x02);
     EXPECT_EQ(xtime(0x08), 0x10);
@@ -78,7 +76,7 @@ TEST(UtilsTestCase, CopyWordTest) {
     EXPECT_EQ(src, dst);
 }
 
-TEST(UtilsTestCase, SubbytesTest) {
+TEST(UtilsTestCase, SubBytesTest) {
     using aes::internal::SBOX;
     using aes::const_block;
     constexpr size_t blocks_in_sbox = SBOX.size() / BLOCK_SIZE;
@@ -93,7 +91,7 @@ TEST(UtilsTestCase, SubbytesTest) {
     }
 }
 
-TEST(UtilsTestCase, ShiftrowsTest) {
+TEST(UtilsTestCase, ShiftRowsTest) {
     block_array input_block{
         0xB4, 0x15, 0xF8, 0x01,
         0x68, 0x58, 0x55, 0x2E,
@@ -108,11 +106,11 @@ TEST(UtilsTestCase, ShiftrowsTest) {
         0x5F, 0x15, 0x55, 0x4C
     };
 
-    aes::internal::shiftrows(input_block);
+    aes::internal::shift_rows(input_block);
     EXPECT_EQ(input_block, correct_block);
 }
 
-TEST(UtilsTestCase, MixcolumnsTest) {
+TEST(UtilsTestCase, MixColumnsTest) {
     block_array input_block{
             0xB4, 0x58, 0x12, 0x4C,
             0x68, 0xB6, 0x8A, 0x01,
@@ -127,7 +125,7 @@ TEST(UtilsTestCase, MixcolumnsTest) {
             0x98, 0xC6, 0x34, 0x39
     };
 
-    aes::internal::mixcolumns(input_block);
+    aes::internal::mix_columns(input_block);
     EXPECT_EQ(input_block, correct_block);
 }
 
@@ -144,4 +142,58 @@ TEST(UtilsTestCase, BlockXorTest) {
 
     aes::internal::block_xor(first, second);
     EXPECT_EQ(first, correct_word);
+}
+
+TEST(UtilsTestCase, InverseSubBytesTest) {
+    using aes::internal::INVERSE_SBOX;
+    using aes::const_block;
+    constexpr size_t blocks_in_sbox = INVERSE_SBOX.size() / BLOCK_SIZE;
+
+    for (size_t i = 0; i < blocks_in_sbox; ++i) {
+        block_array input_block{};
+        std::iota(input_block.begin(), input_block.end(), i * BLOCK_SIZE);
+        aes::internal::inverse_sub_bytes(input_block);
+
+        const_block correct_block{INVERSE_SBOX.data() + i * BLOCK_SIZE, BLOCK_SIZE};
+        EXPECT_EQ(const_block{input_block}, correct_block);
+    }
+}
+
+TEST(UtilsTestCase, InverseShiftRowsTest) {
+    block_array input_block{
+            0xB4, 0x58, 0x12, 0x4C,
+            0x68, 0xB6, 0x8A, 0x01,
+            0x4B, 0x99, 0xF8, 0x2E,
+            0x5F, 0x15, 0x55, 0x4C
+    };
+
+    block_array correct_block{
+            0xB4, 0x15, 0xF8, 0x01,
+            0x68, 0x58, 0x55, 0x2E,
+            0x4B, 0xB6, 0x12, 0x4C,
+            0x5F, 0x99, 0x8A, 0x4C
+    };
+
+    aes::internal::inverse_shift_rows(input_block);
+    EXPECT_EQ(input_block, correct_block);
+}
+
+TEST(UtilsTestCase, InverseMixColumnsTest) {
+    block_array input_block{
+            0xC5, 0x7E, 0x1C, 0x15,
+            0x9A, 0x9B, 0xD2, 0x86,
+            0xF0, 0x5F, 0x4B, 0xE0,
+            0x98, 0xC6, 0x34, 0x39
+
+    };
+
+    block_array correct_block{
+            0xB4, 0x58, 0x12, 0x4C,
+            0x68, 0xB6, 0x8A, 0x01,
+            0x4B, 0x99, 0xF8, 0x2E,
+            0x5F, 0x15, 0x55, 0x4C
+    };
+
+    aes::internal::inverse_mix_columns(input_block);
+    EXPECT_EQ(input_block, correct_block);
 }
