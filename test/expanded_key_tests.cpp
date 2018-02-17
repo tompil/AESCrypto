@@ -1,12 +1,11 @@
-#include "expanded_key.h"
+#include "internal/expanded_key.h"
+#include "defs.h"
 
-#include <array>
 #include <gtest/gtest.h>
-#include <vector>
 
 
 using aes::internal::expanded_key;
-using block_array = std::array<uint8_t, aes::BLOCK_SIZE>;
+using block_array = std::array<uint8_t, ::aes::BLOCK_SIZE>;
 
 
 void validate_round_keys(const expanded_key& exp_key, const std::vector<block_array>& correct_round_keys) {
@@ -22,7 +21,7 @@ void validate_round_keys(const expanded_key& exp_key, const std::vector<block_ar
 
 TEST(ExpandedKeyTestCase, Aes128KeyTest)
 {
-    std::array<uint8_t, aes::KEY128_SIZE> key{
+    std::array<uint8_t, ::aes::KEY128_SIZE> key{
             0x2b, 0x7e, 0x15, 0x16, 0x28, 0xae, 0xd2, 0xa6, 0xab, 0xf7, 0x15, 0x88, 0x09, 0xcf, 0x4f, 0x3c
     };
 
@@ -46,7 +45,7 @@ TEST(ExpandedKeyTestCase, Aes128KeyTest)
 
 TEST(ExpandedKeyTestCase, Aes192KeyTest)
 {
-    std::array<uint8_t, aes::KEY192_SIZE> key{
+    std::array<uint8_t, ::aes::KEY192_SIZE> key{
         0x8E, 0x73, 0xB0, 0xF7, 0xDA, 0x0E, 0x64, 0x52, 0xC8, 0x10, 0xF3, 0x2B,
         0x80, 0x90, 0x79, 0xE5, 0x62, 0xF8, 0xEA, 0xD2, 0x52, 0x2C, 0x6B, 0x7B
     };
@@ -73,7 +72,7 @@ TEST(ExpandedKeyTestCase, Aes192KeyTest)
 
 TEST(ExpandedKeyTestCase, Aes256KeyTest)
 {
-    std::array<uint8_t, aes::KEY256_SIZE> key{
+    std::array<uint8_t, ::aes::KEY256_SIZE> key{
         0x60, 0x3d, 0xeb, 0x10, 0x15, 0xca, 0x71, 0xbe, 0x2b, 0x73, 0xae, 0xf0, 0x85, 0x7d, 0x77, 0x81,
         0x1f, 0x35, 0x2c, 0x07, 0x3b, 0x61, 0x08, 0xd7, 0x2d, 0x98, 0x10, 0xa3, 0x09, 0x14, 0xdf, 0xf4
     };
@@ -101,9 +100,9 @@ TEST(ExpandedKeyTestCase, Aes256KeyTest)
 }
 
 TEST(ExpandedKeyTestCase, SizeTest) {
-    std::array<uint8_t, aes::KEY128_SIZE> key128{};
-    std::array<uint8_t, aes::KEY192_SIZE> key192{};
-    std::array<uint8_t, aes::KEY256_SIZE> key256{};
+    std::array<uint8_t, ::aes::KEY128_SIZE> key128{};
+    std::array<uint8_t, ::aes::KEY192_SIZE> key192{};
+    std::array<uint8_t, ::aes::KEY256_SIZE> key256{};
 
     expanded_key exp_key128{aes::aes128_key{key128}};
     EXPECT_EQ(exp_key128.size(), 11);

@@ -1,9 +1,8 @@
 #ifndef CRYPTOAES_UTILS_H
 #define CRYPTOAES_UTILS_H
 
-#include "defs.h"
-
-#include <algorithm>
+#include "internal/internal_defs.h"
+#include "../defs.h"
 
 
 namespace aes {

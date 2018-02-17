@@ -1,4 +1,4 @@
-#include "utils.h"
+#include "internal/utils.h"
 
 #include <gtest/gtest.h>
 #include <numeric>
@@ -6,7 +6,7 @@
 
 
 using aes::internal::WORD_SIZE;
-using aes::BLOCK_SIZE;
+using ::aes::BLOCK_SIZE;
 using ByteType = aes::internal::word::value_type;
 using word_array = std::array<ByteType, WORD_SIZE>;
 using block_array = std::array<ByteType, BLOCK_SIZE>;

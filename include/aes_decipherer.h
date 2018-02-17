@@ -1,7 +1,7 @@
 #ifndef CRYPTOAES_AES_DECIPHERER_H
 #define CRYPTOAES_AES_DECIPHERER_H
 
-#include "expanded_key.h"
+#include "internal/expanded_key.h"
 
 
 namespace aes {

@@ -1,12 +1,12 @@
 #ifndef CRYPTOAES_KEY_EXPANDER_H
 #define CRYPTOAES_KEY_EXPANDER_H
 
-#include "defs.h"
+#include "internal/internal_defs.h"
 #include "utils.h"
+#include "defs.h"
 
 #include <cstdint>
 #include <cstddef>
-#include <gsl/span>
 
 
 namespace aes {

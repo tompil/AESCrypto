@@ -1,6 +1,5 @@
-#include "expanded_key.h"
-
-#include <algorithm>
+#include "internal/expanded_key.h"
+#include "defs.h"
 
 
 namespace aes {
